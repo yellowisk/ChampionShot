@@ -7,15 +7,15 @@ body {
 .login-area {
     display: flex;
     align-items: center;
-    height: 100vh;
     justify-content: center;
+    margin-top: 5%;
 }
 
 .login {
     background-color: #181920;
     align-items: center;
     width: 355px;
-    height: 320px;
+    height: 50%;
     padding: 35px;
     border-radius: 10px;
 }
@@ -28,7 +28,8 @@ body {
 
 .login input {
     margin-top: 10px;
-    background-color: #181920;
+    background-color: #111114;
+    font-size: 1em;
     color: #CBD0F7;
     padding-left: 10px;
     border: none;
@@ -37,31 +38,46 @@ body {
     border-radius: 8px;
 }
 
-.login img {
-    width: 65px;
-    height: auto;
+.login-img {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    width: 300px;
+    margin: 0 auto;
 }
 
 .login::placeholder {
     color: #CBD0F7;
     font-size: 14PX;
-
 }
 
-form [type="submit"]{
-display: block;
-background-color: #5568FE;
-font-size: 20px;
-text-transform: uppercase;
-font-weight: bold;
-margin-top: 3em;
-}
-
-p{
+.login button {
+    display: block;
+    background-color: #5568FE;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
     color: #CBD0F7;
+    padding: 10px;
+    margin-top: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .3s ease 0s;
 }
 
-a{
+.login button:hover {
+    background-color: #7383ff;
+}
+
+p {
+    color: #CBD0F7;
+    display: flex;
+    justify-content: space-around;
+}
+
+a {
     color: #5568FE;
     text-decoration: none;
     margin-left: 10px;

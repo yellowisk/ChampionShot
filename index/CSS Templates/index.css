@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@700&display=swap');
+
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #1B1F27;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    margin: 0;
+    display: flex;
+    padding: 20px 10px;
+    background-color: #242636;
+    flex-direction: row;
+    align-items: center;
+}
+
+#logo {
+    width: 15%;
+    font-weight: 200;
+    text-align: center;
+    ;
+    text-transform: uppercase;
+    color: #CBD0F7;
+    font-family: 'Kanit', sans-serif;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    position: absolute;
+    right: 20%;
+    justify-content: end;
+    list-style: none;
+    flex-direction: row;
+    width: 40%;
+    align-self: center;
+}
+
+#nav-item {
+    margin: 0 10px;
+    text-transform: uppercase;
+}
+
+#nav-item a {
+    text-decoration: none;
+    color: #CBD0F7;
+    transition: all .3s ease 0s;
+    padding: 30px 20px;
+    font-weight: bold;
+}
+
+#username-login {
+    position: absolute;
+    right: 8%;
+    color: #CBD0F7;
+}
+
+#nav-item a:hover {
+    background-color: #1B1F27;
+}
+
+#user {
+    position: absolute;
+    right: 5%;
+    transition: all .3s ease 0s;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+#user:hover {
+    opacity: .6;
+}
+
+.grid {
+    display: grid;
+    width: 60%;
+    height: 80vh;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin: 40px auto 3%;
+    color: #CBD0F7;
+}
+
+.grid-description {
+    grid-column: 1/2;
+    grid-row: 1/1;
+    padding: 20px;
+}
+
+.grid-description h1 {
+    font-size: 4em;
+    font-family: 'Kanit', sans-serif;
+    margin-bottom: 20px;
+}
+
+.grid-description p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.grid-image {
+    grid-column: 2/3;
+    grid-row: 1/4;
+    padding: 20px;
+}
+
+#img-grid {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.grid-button {
+    display: flex;
+    grid-column: 1/2;
+    grid-row: 2/4;
+    justify-content: center;
+}
+
+.grid-button a {
+    width: 35%;
+    height: 60px;
+    margin: 40px auto;
+    border: none;
+    outline: none;
+    background-color: #CBD0F7;
+    text-align: center;
+    line-height: 60px;
+    color: #1B1F27;
+    border-radius: 50px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 1.2em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .3s ease 0s;
+}
+
+.grid-button a:hover {
+    opacity: .6;
+    width: 36%;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS Templates/team.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <title>TEAMS</title>
+
+    <script>
+        $(document).ready(function () {
+            $("#btn-back").click(function () {
+                console.log("clicou")
+                window.location.href = "../index.html"
+            })
+
+            $("#btn-update").click(function () {
+                window.location.reload();
+            })
+
+            $.ajax({
+                url: "../../team.php",
+                method: "GET",
+                success: function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        let teamName = data[i]["name"];
+                        let teamInitials = data[i]["initials"];
+
+                        let table = $("table");
+                        let tr = $("<tr></tr>");
+                        let tdName = $("<td></td>").text(teamName);
+                        let tdInitials = $("<td></td>").text(teamInitials);
+                        let tdUpdate = $("<td><button id='btn-table-update'>Update</button></td>")
+                        let tdDelete = $("<td><button id='btn-table-delete'>Delete</button></td>")
+
+                        tr.append(tdName);
+                        tr.append(tdInitials);
+                        tr.append(tdUpdate);
+                        tr.append(tdDelete);
+
+                        table.append(tr);
+                    }
+                },
+            })
+
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                let name = $("input[name=name]").val();
+                let initials = $("input[name=initials]").val();
+
+                $.ajax({
+                    url: "../../team.php",
+                    method: "POST",
+                    data: {
+                        name: name,
+                        initials: initials,
+                    },
+                    success: function (data) {
+                        alert("Team created successfully!");
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        alert(error["responseJSON"]["status"])
+                    },
+                });
+            }) 
+        })
+    </script>
+
+  </head>
+  <body>
+
+    <nav>
+        <h1 id="logo">Champion Shot</h1>
+        <ul class="nav-list">
+            <li id="nav-item"><a href="../pages/team.html">Team</a></li>
+            <li id="nav-item"><a href="../pages/match.html">Match</a></li>
+            <li id="nav-item"><a href="../pages/shots.html">Shot</a></li>
+        </ul>
+    </nav>
+
+    <section class="team-area">
+        
+      <div class="team">
+        <div>
+          <img src="../img/team.png" id="img-team"/>
+        </div>
+
+        <form method="POST">
+          <p>Name</p>
+          <input
+            type="text"
+            name="name"
+            placeholder="Add the team's name"
+            autocomplete="off"
+            autofocus
+            required
+          />
+          <p>Initials</p>
+          <input
+            type="text"
+            name="initials"
+            placeholder="Add the team's initials"
+            autocomplete="off"
+            autofocus
+            required
+          />
+          <button type="submit" id="btn-add">ADD TEAM</button>
+        </form>
+      </div>
+
+      <div class="team-table">
+        <table>
+            <h1 id="table-head">Teams</h1>
+            <tr>
+                <th>Team</th>
+                <th>Initials</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </table>
+        <button type="reset" id="btn-update">Refresh</button>
+      </div>
+    </section>
+
+    <button type="menu" id="btn-back">Back</button>
+
+  </body>
+</html>

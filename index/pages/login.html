@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS Templates/login.css"/>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <title>LOGIN</title>
+
+    <!-- JS -->
+    <script>
+      $(document).ready(function () {
+        $("form").submit(function (e) {
+          e.preventDefault();
+
+          let name = $("input[name=name]").val();
+          let login = $("input[name=login").val();
+          let password = $("input[name=password").val();
+          let doLogin = $("button[name=doLogin]").val();
+
+            console.log(`${name}, ${login}, ${password}`);
+
+          $.ajax({
+            url: "../../user.php",
+            method: "POST",
+            data: {
+              name: name,
+              login: login,
+              password: password,
+              doLogin: "login",
+            },
+            success: function (data) {
+              console.log("Funcionou!");
+              window.location.href = "../index.html";
+            },
+            error: function (error) {
+              alert(error["responseJSON"]["status"])
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <section class="login-area">
+      <div class="login">
+        <div class="login-img">
+          <img src="../img/logo.png">
+        </div>
+
+        <form method="POST">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your username"
+            autofocus
+            autocomplete="off"
+            required
+          />
+          <input
+            type="email"
+            name="login"
+            placeholder="Your e-mail"
+            autofocus
+            autocomplete="off"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Your password"
+            autofocus
+            autocomplete="off"
+            required
+          />
+          <button name="doLogin" value="login">LOGIN</button>
+        </form>
+        <p>Ain't got an account yet?<a href="#">Create account</a></p>
+      </div>
+    </section>
+  </body>
+</html>

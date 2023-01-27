@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS Templates/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "../user.php",
+                method: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data[i]["name"])
+                        $("#username-login").text(data[i]["name"]);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                    console.log(error["responseJSON"]["status"]);
+                }
+            });
+        })
+    </script>
+
+    <title>Home</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <nav>
+            <h1 id="logo">Champion Shot</h1>
+            <ul class="nav-list">
+                <li id="nav-item"><a href="pages/team.html">Team</a></li>
+                <li id="nav-item"><a href="pages/match.html">Match</a></li>
+                <li id="nav-item"><a href="pages/shots.html">Shot</a></li>
+            </ul>
+            <h3 id="username-login">Username</h3>
+            <span id="user">
+                <img src="img/user.png" alt="" width="40px">
+            </span>
+        </nav>
+
+        <div class="grid">
+            <div class="grid-description">
+                <h1>CHAMPION SHOT</h1>
+                <p>Become a champion! 
+                    Be part of the soccer championships fun by gathering your friends together and making bets through the action of what we call ‘taking shots’! These shots are your way of foresighting game results and sending it to our web service. You choose the team you think is going to win a match and it’ll tell you whether you got it wrong or right through reliable algorithm functions. <br> <br>
+                    The best part? You’ll get to take these shots with your friends, competing against them, in custom championship matches with custom teams, both which everyone can create, update, view and delete. <br> <br>
+                    Wanna know who wins among your friends? Take a shot!
+                </p>
+            </div>
+            <div class="grid-image">
+                <img src="img/main-2.jpeg" id="img-grid">
+            </div>
+            <div class="grid-button">
+                <a href="pages/team.html">TRY NOW</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

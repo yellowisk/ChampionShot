@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS Templates/match.css">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#btn-back").click(function () {
+                window.location.href = "../index.html"
+            })
+
+            $("#btn-update").click(function () {
+                window.location.reload();
+            })
+
+            $.ajax({
+                url: "../../team.php",
+                method: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        let name = data[i]["name"];
+
+                        let selectTeamA = $("select[name=nameA]");
+                        let selectTeamB = $("select[name=nameB]");
+
+                        let optionA = $("<option></option>").text(name);
+                        let optionB = $("<option></option>").text(name);
+
+                        selectTeamA.append(optionA);
+                        selectTeamB.append(optionB);
+                    }
+                }
+            })
+
+            $.ajax({
+                url: "../../matches.php",
+                method: "GET",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        let idTeamA = data[i]["idTeamA"];
+                        let idTeamB = data[i]["idTeamB"];
+                        $.ajax({
+                            url: "../../matches.php",
+                            type: "POST",
+                            data: {
+                                idA: idTeamA,
+                                idB: idTeamB
+                            },
+                            success: function (data) {
+                                let nameTeamA = data["nameTeamA"];
+                                let nameTeamB = data["nameTeamB"];
+
+                                let table = $("table");
+                                let tr = $("<tr></tr>");
+                                let tdNameA = $("<td></td>").text(nameTeamA);
+                                let tdNameB = $("<td></td>").text(nameTeamB);
+                                let tdDelete = $("<td><button id='btn-table-delete'>Delete</button></td>")
+
+                                tr.append(tdNameA);
+                                tr.append(tdNameB);
+                                tr.append(tdDelete);
+
+                                table.append(tr);
+                            }
+                        })
+                    }
+                }
+            })
+
+            $("form").submit(function (e) {
+                e.preventDefault();
+                let nameA = $("select[name=nameA]").val();
+                let nameB = $("select[name=nameB]").val();
+
+                $.ajax({
+                    url: "../../matches.php",
+                    type: "POST",
+                    data: {
+                        nameA: nameA,
+                        nameB: nameB
+                    },
+                    success: function (data) {
+                        let idTeamA = data["idTeamA"]["id"]
+                        let idTeamB = data["idTeamB"]["id"];
+
+                        $.ajax({
+                            url: "../../matches.php",
+                            type: "POST",
+                            data: {
+                                idTeamA: idTeamA,
+                                idTeamB: idTeamB
+                            },
+                            success: function () {
+                                alert("Match successfully registered!");
+                            }
+                        })
+                        window.location.reload();
+                    }
+                })
+            }) 
+
+        })
+    </script>
+    <title>MATCH</title>
+</head>
+<body>
+
+    <nav>
+        <h1 id="logo">Champion Shot</h1>
+        <ul class="nav-list">
+            <li id="nav-item"><a href="../pages/team.html">Team</a></li>
+            <li id="nav-item"><a href="../pages/match.html">Match</a></li>
+            <li id="nav-item"><a href="../pages/shots.html">Shot</a></li>
+        </ul>
+    </nav>
+
+    <section class="match-area">
+        <div class="match">
+            <div>
+                <img src="../img/match.png" id="img-match">
+            </div>
+
+            <form method="POST">
+                <div class="select">
+                    <select class="selectTeamA" id="standart-select" name="nameA">
+                    </select>
+                </div>
+                
+                <div class="select">
+                    <select class="selectTeamB" id="standart-select" name="nameB">
+                    </select>
+                </div>
+
+                <button type="submit" id="btn-add">CREATE MATCH</button>                
+                
+            </form>
+        </div>
+
+        <div class="match-table">
+            <table>
+                <h1 id="table-head">Matches</h1>
+                <tr>
+                    <th>Team A</th>
+                    <th>Team B</th>
+                    <th>Delete</th>
+                </tr>
+            </table>
+            <button type="reset" id="btn-update">Refresh</button>
+          </div>
+        </section>
+    
+        <button type="menu" id="btn-back">Back</button>
+    </section>
+</body>
+</html>
