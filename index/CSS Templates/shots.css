@@ -145,6 +145,18 @@ a{
     margin-left: 10px;
 }
 
+#logo a {
+    color: #CBD0F7;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+#logo:hover a {
+    color: #5568FE;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
 select {
     appearance: none;
     background-color: transparent;
